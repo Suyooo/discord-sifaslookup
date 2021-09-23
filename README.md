@@ -1,10 +1,12 @@
-# SIFAS Lookup for Discord
+# SIFAS Card Lookup for Discord
 
 All this does is offer a single Slash Command called `/lookup` in your server, allowing users to look up SIFAS cards.
 This can be useful if others use referencing you are not familiar with. Replies are ephemeral, so they're only visible
 to the command user, and you don't have to worry about spamming the channel if you look up a lot of cards.
 
-Just want to add this to your server? [Have Aran join your Discord server!](https://discord.com/oauth2/authorize?client_id=884344571402780703&scope=applications.commands)
+Just want to add this to your server? [Have Aran join your Discord server!](https://discord.com/oauth2/authorize?client_id=884344571402780703&scope=applications.commands)  
+(Since this is a Slash Command instead of a Bot, Aran will not show up in your user list - only as an Integration, and
+when replying to a lookup.)
 
 ## Command Examples
 
