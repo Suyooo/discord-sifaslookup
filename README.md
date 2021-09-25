@@ -50,8 +50,8 @@ If you want to run this yourself you need to:
 
 * Create a `config.json` file with two keys, `clientId` and `token` (being your app's client ID and bot token)
   * The `guildId` key is optional, if you want to register as a Guild command instead of a Global command
-* Have a `lookup.db` SQLite3 database matching the scheme in [database_scheme.sql]()
+* Have a `lookup.db` SQLite3 database matching the scheme in [database_scheme.sql](database_scheme.sql)
 * If you're not on Unix/Linux, you probaby need to mess with the socket thing, no idea how other OSes will handle that
-  * At least you'll need to change the `SOCKET_FILE` constant in [main.js]() 
+  * At least you'll need to change the `SOCKET_FILE` constant in [main.js](main.js) 
   * You can also just comment the entire thing out if you don't need it - it can be used if you want to automatically
     update the database like Aran does. Using the socket you can reload the database without restarting
