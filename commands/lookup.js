@@ -67,7 +67,7 @@ async function gotLookupResult(interaction, number, err, rows) {
                         .addOptions(rows.map(row => {
                             return {
                                 label: selectSummary(row),
-                                value: JSON.stringify({"mid": row.member_id, "id": row.id})
+                                value: row.member_id + "_" + row.id
                             }
                         })),
                 )]
@@ -268,11 +268,16 @@ module.exports = {
         }
     },
     async selection(interaction) {
-        let j = JSON.parse(interaction.values[0]);
-        await query('SELECT *, ' + Number(j.mid) + ' AS member_id FROM "' + Number(j.mid) + '" WHERE id=' + Number(j.id), (err, rows) => {
-            interaction.update({
-                content: " ", embeds: makeEmbed(rows[0]), ephemeral: true, components: []
-            });
+        log.info("LOOKUP", interaction.user.tag + " made a selection: " + interaction.values[0]);
+        let ids = interaction.values[0].split("_");
+        await query('SELECT *, ' + Number(ids[0]) + ' AS member_id FROM "' + Number(ids[0]) + '" WHERE id=' + Number(ids[1]), (err, rows) => {
+            try {
+                interaction.update({
+                    content: " ", embeds: makeEmbed(rows[0]), ephemeral: true, components: []
+                });
+            } catch (e) {
+                log.debug("LOOKUP", interaction.user.tag + " made a selection after interaction token expired");
+            }
         });
     }
 };

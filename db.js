@@ -16,13 +16,16 @@ async function checkCache(err, row) {
 }
 
 async function loadUnitImage(id, tries) {
+    log.info("ICON","Getting Icon for #" + id + " (Try " + (tries + 1) + "): Queued");
+    await new Promise(resolve => setTimeout(resolve, Math.random() * 60000));
     log.info("ICON","Getting Icon for #" + id + " (Try " + (tries + 1) + "): Start");
     let t = Math.pow(2, tries) * 2;
     axios
         .get("https://allstars.kirara.ca/api/private/cards/ordinal/" + id + ".json")
         .then(res => {
             let writer = fs.createWriteStream("cache/" + id + ".png");
-            axios.get(res.data.result[0].idolized_appearance.thumbnail_asset_path, { responseType: 'stream' }).then(r => r.data.pipe(writer));
+            axios.get(res.data.result[0].idolized_appearance.thumbnail_asset_path, { responseType: 'stream' })
+                .then(r => r.data.pipe(writer)).then(() => log.info("INFO", "Icon for #" + id + " saved"));
         })
         .catch(error => {
             log.warn("ICON","Getting Icon for #" + id + " (Try " + (tries + 1) + "): " + error);
