@@ -6,7 +6,7 @@ CREATE TABLE "1" (
     "is_fes"	INTEGER NOT NULL, -- 0 or 1
     "is_party"	INTEGER NOT NULL, -- 0 or 1
     "is_event"	INTEGER NOT NULL, -- 0 or 1
-    "name"      TEXT    NOT NULL, -- JP card name (unidolized and idolized)
+    "name"      TEXT    NOT NULL, -- JP card name (unidolized and idolized - unused)
     "ur_number" INTEGER,          -- Which UR this card is (by numbered referencing), or NULL if R/SR
     PRIMARY KEY ("id")
 )
