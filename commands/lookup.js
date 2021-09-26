@@ -16,7 +16,8 @@ function selectSummary(card) {
 
     let number = "";
     if (card.ur_number) {
-        number = " (" + idmap[card.member_id].split(" ")[0] + card.ur_number + ")"
+        if (card.member_id === 106) number = " (Yohane" + card.ur_number + ")" // special treatment to avoid the ~~
+        else number = " (" + idmap[card.member_id].split(" ")[0] + card.ur_number + ")"
     }
 
     return "#" + card.id + " " + attr.substr(0,1) + role + " " + (card.is_event ? "Event " : "") + rarity + number;
@@ -122,6 +123,7 @@ module.exports = {
                     "Look up Kanan's Event URs: `/lookup event kanan`\n" +
                     "Look up Maki's Event SRs: `/lookup maki event sr`\n" +
                     "\n" +
+                    "All lookups are case-insensitive!\n" +
                     "You must specify a character - this is a lookup tool, not a search engine. [Use the search function on Kirara instead!](<https://allstars.kirara.ca/cards/search>)",
                 ephemeral: true
             });
@@ -242,10 +244,9 @@ module.exports = {
                         return false;
                     }
 
-                    let mid = namemap[k];
-                    if (mid) {
+                    if (namemap.hasOwnProperty(k)) {
                         if (memberId !== undefined && memberId !== mid) throw Error("There are two or more conflicting Character filters in your lookup term.");
-                        memberId = mid;
+                        memberId = namemap[k];
                         return false;
                     }
 
