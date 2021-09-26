@@ -112,8 +112,8 @@ module.exports = {
                     "Look up You's Sk-type Rs: `/lookup r you sk`\n" +
                     " \n" +
                     "Look up Ayumu's Elegant URs:\n" +
-                    "`/lookup e pomu`\n" +
                     "`/lookup elegant ayumu`\n" +
+                    "`/lookup e pomu`\n" +
                     " \n" +
                     "Look up Kasumi's second Fes UR:\n" +
                     "`/lookup fes kasu 2`\n" +
@@ -121,7 +121,7 @@ module.exports = {
                     "\n" +
                     "Look up Ai's Party URs: `/lookup party ai`\n" +
                     "Look up Kanan's Event URs: `/lookup event kanan`\n" +
-                    "Look up Maki's Event SRs: `/lookup maki event sr`\n" +
+                    "Look up using shorthands: `/lookup KasumiF2` `/lookup aiP` `/lookup kanane`\n" +
                     "\n" +
                     "All lookups are case-insensitive!\n" +
                     "You must specify a character - this is a lookup tool, not a search engine. [Use the search function on Kirara instead!](<https://allstars.kirara.ca/cards/search>)",
@@ -138,17 +138,28 @@ module.exports = {
                 let role = undefined;
                 let fesPartyEvent = undefined;
 
+                let m;
                 let leftovers = s.split(" ").flatMap(k => {
                     let kk = [k.toLowerCase()];
                     if (kk[0].length === 3 && ["s", "p", "c", "a", "n", "e"].indexOf(kk[0].substring(0, 1)) !== -1 && ["vo", "sp", "gd", "sk"].indexOf(kk[0].substring(1, 3)) !== -1) {
                         // Split up combined Short Attribute + Type keywords
                         kk = [kk[0].substring(0, 1), kk[0].substring(1, 3)];
-                    } else {
-                        // Split up combined Character Name + Number keywords
-                        let m = kk[0].match(/^(.+?)(\d+)$/);
-                        if (m) {
-                            kk = [m[1], m[2]];
+                    } else if (((m = kk[0].match(/^([efp])(.+?)(\d+)?$/)) !== null && namemap.hasOwnProperty(m[2])) ||
+                        ((m = kk[0].match(/^(.+?)([efp])(\d+)?$/)) !== null && namemap.hasOwnProperty(m[1]))) {
+                        log.debug("MATCH1", m);
+                        // Split up combined Character Name + Card Source (+ optional Number) keywords
+                        kk = [namemap.hasOwnProperty(m[1]) ? m[1] : m[2]];
+                        let source = namemap.hasOwnProperty(m[1]) ? m[2] : m[1];
+                        if (source !== undefined) {
+                            kk.push(source === "e" ? "event" : (source === "f" ? "fes" : "party"));
                         }
+                        if (m[3] !== undefined) {
+                            kk.push(m[3]);
+                        }
+                    } else if ((m = kk[0].match(/^(.+?)(\d+)$/)) !== null) {
+                        log.debug("MATCH2", m);
+                        // Split up other combined query + Number keywords
+                        kk = [m[1],m[2]];
                     }
                     return kk;
                 }).filter(k => {

@@ -25,8 +25,8 @@ Look up You's Sk-type SRs: `/lookup you sr sk`
 Look up You's Sk-type Rs: `/lookup r you sk`
 
 Look up Ayumu's Elegant URs:  
-`/lookup e pomu`  
-`/lookup elegant ayumu`
+`/lookup elegant ayumu`  
+`/lookup e pomu`
 
 Look up Kasumi's second Fes UR:  
 `/lookup fes kasu 2`  
@@ -34,7 +34,7 @@ Look up Kasumi's second Fes UR:
 
 Look up Ai's Party URs: `/lookup party ai`  
 Look up Kanan's Event URs: `/lookup event kanan`  
-Look up Maki's Event SRs: `/lookup maki event sr`
+Look up using shorthands: `/lookup KasumiF2` `/lookup aiP` `/lookup kanane`
 
 ## What This Does Not Do
 
