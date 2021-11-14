@@ -27,7 +27,7 @@ function makeEmbed(card) {
     return [
         new MessageEmbed().setTitle("[" + attrs[card.attr].substr(0,1) + roles[card.role] + "] " + (card.is_event ? "Event " : "") +
             (card.is_fes ? "Fes" : (card.is_party ? "Party" : rarities[card.rarity])) + " " + idmap[card.member_id])
-            .setThumbnail("https://suyo.be/sifas/thumbnail/" + card.id + ".png")
+            .setThumbnail("https://suyo.be/sifas/wiki/images/card_thumb_idlz/" + card.id + ".png")
             .setColor(colourmap[card.member_id])
             .setDescription("https://allstars.kirara.ca/card/" + card.id)
     ];
