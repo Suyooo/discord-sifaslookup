@@ -10,7 +10,7 @@ async function checkCache(err, row) {
         log.error("DB", err);
         return;
     }
-    if (!fs.existsSync("cache/" + row.id + ".png")) {
+    if (!fs.existsSync("cache/unidlz/" + row.id + ".png")) {
         loadUnitImage(row.id, 0);
     }
 }
@@ -23,9 +23,12 @@ async function loadUnitImage(id, tries) {
     axios
         .get("https://allstars.kirara.ca/api/private/cards/ordinal/" + id + ".json")
         .then(res => {
-            let writer = fs.createWriteStream("cache/" + id + ".png");
+            let writer1 = fs.createWriteStream("cache/unidlz/" + id + ".png");
+            axios.get(res.data.result[0].normal_appearance.thumbnail_asset_path, { responseType: 'stream' })
+                .then(r => r.data.pipe(writer1)).then(() => log.info("INFO", "Unidolized icon for #" + id + " saved"));
+            let writer2 = fs.createWriteStream("cache/idlz/" + id + ".png");
             axios.get(res.data.result[0].idolized_appearance.thumbnail_asset_path, { responseType: 'stream' })
-                .then(r => r.data.pipe(writer)).then(() => log.info("INFO", "Icon for #" + id + " saved"));
+                .then(r => r.data.pipe(writer2)).then(() => log.info("INFO", "Idolized icon for #" + id + " saved"));
         })
         .catch(error => {
             log.warn("ICON","Getting Icon for #" + id + " (Try " + (tries + 1) + "): " + error);
