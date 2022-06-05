@@ -39,7 +39,7 @@ module.exports = {
         try {
             const searchindex = JSON.parse(fs.readFileSync("searchindex.js").subarray(18));
             const res = fuzzysort.go(s, searchindex, {
-                "keys": ["romaji", "romaji_clean", "hiragana", "katakana", "romanized", "kanji", "kanji_clean", "abbr_kn", "abbr_ro"],
+                "keys": ["romaji", "romaji_clean", "hiragana", "katakana", "kanji", "kanji_clean", "abbr_kn", "abbr_ro"],
                 threshold: -500, limit: 5,
                 scoreFn: a => Math.max(...a.map(x => x ? x.score : -10000))
             }).map(a => {
