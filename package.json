@@ -1,0 +1,19 @@
+{
+  "name": "discord-sifaslookup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/builders": "^0.6.0",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "axios": "^0.21.3",
+    "discord-api-types": "^0.18.1",
+    "discord.js": "^13.1.0",
+    "fuzzysort": "^2.0.1",
+    "sqlite3": "^5.0.2",
+    "winston": "^3.3.3"
+  }
+}
