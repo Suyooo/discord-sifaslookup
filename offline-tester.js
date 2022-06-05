@@ -1,11 +1,11 @@
-const lookup = require("./commands/lookup.js");
+const mapdb = require("./commands/mapdb.js");
 const log = require("./logger");
 const {loadDB} = require("./db");
 
 const stdin = process.openStdin();
 
 stdin.addListener("data", function(d) {
-    lookup.execute({
+    mapdb.execute({
         options: {
             getString: () => d.toString().trim()        },
         user: {
