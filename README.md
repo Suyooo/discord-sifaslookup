@@ -1,9 +1,9 @@
-# SIFAS Card and Map Lookup for Discord
+# SIFAS Card and Song Lookup for Discord
 
 This bot offers two Slash Commands, `/lookup` and `/mapdb` in your server, allowing users to look up SIFAS cards and
-maps. This can be useful if others reference cards in ways you are not familiar with, or you're a mobile user who
+songs. This can be useful if others reference cards in ways you are not familiar with, or you're a mobile user who
 doesn't want to switch off the app. Replies are ephemeral, so they're only visible to the command user, and you don't
-have to worry about spamming the channel if you look up a lot of cards or maps.
+have to worry about spamming the channel if you look up a lot of cards or songs.
 
 Just want to add this to your server? [Have Aran join your Discord server!](https://discord.com/oauth2/authorize?client_id=884344571402780703&scope=applications.commands)  
 (Since these are Slash Commands instead of a Bot, Aran will not show up in your user list - only as an Integration, and
@@ -39,12 +39,13 @@ Look up Ai's Party URs: `/lookup party ai`
 Look up Kanan's Event URs: `/lookup event kanan`  
 Look up using shorthands: `/lookup KasumiF2` `/lookup aiP` `/lookup kanane`
 
-### Map Lookup
+### Song Lookup
 
 `/mapdb CHASE!`  
 `/mapdb Arashi` (partial matches work)  
 `/mapdb music start` (symbols and case aren't important)  
 `/mapdb nsnm` `/mapdb miraboku` `/mapdb OLP` (abbreviations work too)  
+`/mapdb nijipa+` `/mapdb asfyyy++` (+ or ++ as suffix immediately link Adv+/Challenge)
 
 ## What This Does Not Do
 

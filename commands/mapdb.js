@@ -38,7 +38,13 @@ module.exports = {
         log.info("MAPDB", interaction.user.tag + " looks up " + s);
         try {
             const searchindex = JSON.parse(fs.readFileSync("searchindex.js").subarray(18));
-            const res = fuzzysort.go(s, searchindex, {
+            let pluses = 0;
+            while (s.charAt(s.length - 1) === "+") {
+                s = s.substr(0, s.length - 1);
+                pluses++;
+            }
+
+            let res = fuzzysort.go(s, searchindex, {
                 "keys": ["romaji", "romaji_clean", "hiragana", "katakana", "kanji", "kanji_clean", "abbr_kn", "abbr_ro"],
                 threshold: -500, limit: 5,
                 scoreFn: a => Math.max(...a.map(x => x ? x.score : -10000))
@@ -46,9 +52,32 @@ module.exports = {
                 return {
                     "lid": a.obj.lid,
                     "ldid": a.obj.ldid,
+                    "ldid_advp": a.obj.ldid_advp,
+                    "ldid_chal": a.obj.ldid_chal,
                     "name": a.obj.romaji.target
                 }
             });
+
+            if (pluses > 0) {
+                let potentialFilteredRes = res.filter(a => (pluses === 1) ? a.ldid_advp !== undefined : a.ldid_chal !== undefined);
+                if (potentialFilteredRes.length > 0) {
+                    potentialFilteredRes.forEach(a => {
+                        a.ldid = (pluses === 1) ? a.ldid_advp : a.ldid_chal;
+                        a.name += (pluses === 1) ? " (Adv+)" : " (Challenge)";
+                    });
+                    res = potentialFilteredRes;
+                } else {
+                    potentialFilteredRes = res.filter(a => (pluses === 1) ? a.ldid_chal !== undefined : a.ldid_advp !== undefined);
+                    if (potentialFilteredRes.length > 0) {
+                        potentialFilteredRes.forEach(a => {
+                            a.ldid = (pluses === 1) ? a.ldid_chal : a.ldid_advp;
+                            a.name += (pluses === 1) ? " (Challenge)" : " (Adv+)";
+                        });
+                        res = potentialFilteredRes;
+                    }
+                }
+            }
+
             if (res.length > 0)
                 await interaction.reply({embeds: makeEmbed(res), ephemeral: true});
             else
