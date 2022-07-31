@@ -121,7 +121,7 @@ module.exports = {
                     "\n" +
                     "Look up Ai's Party URs: `/lookup party ai`\n" +
                     "Look up Kanan's Event URs: `/lookup event kanan`\n" +
-                    "Look up using shorthands: `/lookup KasumiF2` `/lookup aiP` `/lookup kanane`\n" +
+                    "Look up using shorthands: `/lookup Kasumi F2` `/lookup aiP` `/lookup kanane`\n" +
                     "\n" +
                     "All lookups are case-insensitive!\n" +
                     "You must specify a character - this is a lookup tool, not a search engine. [Use the search function on Kirara instead!](<https://allstars.kirara.ca/cards/search>)",
@@ -156,8 +156,12 @@ module.exports = {
                         if (m[3] !== undefined) {
                             kk.push(m[3]);
                         }
-                    } else if ((m = kk[0].match(/^(.+?)(\d+)$/)) !== null) {
+                    } else if ((m = kk[0].match(/^([efp])(\d+)$/)) !== null) {
                         log.debug("MATCH2", m);
+                        // Split up other combined Card Source + Number keywords
+                        kk = [m[1] === "e" ? "event" : (m[1] === "f" ? "fes" : "party"),m[2]];
+                    } else if ((m = kk[0].match(/^(.+?)(\d+)$/)) !== null) {
+                        log.debug("MATCH3", m);
                         // Split up other combined query + Number keywords
                         kk = [m[1],m[2]];
                     }
