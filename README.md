@@ -37,7 +37,7 @@ Look up Kasumi's second Fes UR:
 
 Look up Ai's Party URs: `/lookup party ai`  
 Look up Kanan's Event URs: `/lookup event kanan`  
-Look up using shorthands: `/lookup KasumiF2` `/lookup aiP` `/lookup kanane`
+Look up using shorthands: `/lookup Kasumi F2` `/lookup aiP` `/lookup kanane`
 
 ### Song Lookup
 

@@ -12,13 +12,13 @@ function makeEmbed(res) {
             new MessageEmbed().setTitle(res[0].name)
                 .setThumbnail("https://suyo.be/sifas/wiki/images/song_jacket/" + res[0].lid + ".png")
                 .setColor("#ffcc80")
-                .setDescription("https://suyo.be/sifas/mapdb/#live" + res[0].ldid)
+                .setDescription("https://suyo.be/sifas/mapdb/?live" + res[0].ldid)
         ];
     } else {
         let e = new MessageEmbed().setTitle("Multiple results - only showing up to five")
             .setThumbnail("https://suyo.be/sifas/wiki/images/song_jacket/" + res[0].lid + ".png")
             .setColor("#ffcc80")
-        for (const r of res) e.addField(r.name, "https://suyo.be/sifas/mapdb/#live" + r.ldid, false);
+        for (const r of res) e.addField(r.name, "https://suyo.be/sifas/mapdb/?live" + r.ldid, false);
         return [e];
     }
 }
