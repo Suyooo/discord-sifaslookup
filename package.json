@@ -1,6 +1,6 @@
 {
   "name": "discord-sifaslookup",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "",
   "main": "index.js",
   "keywords": [],
@@ -12,7 +12,7 @@
     "axios": "^0.21.3",
     "discord-api-types": "^0.18.1",
     "discord.js": "^13.1.0",
-    "fuzzysort": "^2.0.1",
+    "fuzzysort": "2.0.3",
     "sqlite3": "^5.0.2",
     "winston": "^3.3.3"
   }
